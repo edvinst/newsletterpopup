@@ -1,5 +1,3 @@
-$jsq=jQuery.noConflict();
-
 var EsNewsSubscribers = {
 
     cookieLiveTime: 100,
@@ -27,6 +25,7 @@ var EsNewsSubscribers = {
     {
         return this.baseUrl;
     },
+
     createCookie: function() {
         var days = this.cookieLiveTime;
         var value = 1;
@@ -61,30 +60,30 @@ var EsNewsSubscribers = {
     {
         $jsq('#esns_background_layer').fadeIn();
     }
-}
+};
 
-$jsq(function() {
+jQuery(function() {
     if (EsNewsSubscribers.readCookie() != 1) {
         EsNewsSubscribers.createCookie();
         EsNewsSubscribers.boxOpen();
     }
-    $jsq('#esns_background_layer').css('height', $jsq(document).height()+'px');
-    $jsq('#esns_box_layer').css('margin-top', (($jsq(window).height()-$jsq('#esns_box_layer').height()) /2)+'px');
-    $jsq('#esns_submit').click(function(){
-        var email = $jsq('#esns_email').val();
-        $jsq.post(EsNewsSubscribers.getBaseUrl()+'newsletter/subscriber/newajax/', {'email':email}, function(resp) {
+    jQuery('#esns_background_layer').css('height', jQuery(document).height()+'px');
+    jQuery('#esns_box_layer').css('margin-top', ((jQuery(window).height()-jQuery('#esns_box_layer').height()) /2)+'px');
+    jQuery('#esns_submit').click(function(){
+        var email = jQuery('#esns_email').val();
+        jQuery.post(EsNewsSubscribers.getBaseUrl()+'newsletter/subscriber/newajax/', {'email':email}, function(resp) {
             if (resp.errorMsg) {
-                $jsq('#esns_box_subscribe_response_error').html(resp.errorMsg);
+                jQuery('#esns_box_subscribe_response_error').html(resp.errorMsg);
             } else {
-                $jsq('#esns_box_subscribe_response_error').html('');
-                $jsq('#esns_box_subscribe_response_success').html(resp.successMsg);
-                $jsq('#esns_box_subscribe_form').css('display','none');
-                $jsq('#esns_box_subscribe_response_success').css('display','block');
+                jQuery('#esns_box_subscribe_response_error').html('');
+                jQuery('#esns_box_subscribe_response_success').html(resp.successMsg);
+                jQuery('#esns_box_subscribe_form').css('display','none');
+                jQuery('#esns_box_subscribe_response_success');
                 setTimeout('EsNewsSubscribers.boxClose()', 5000)
             }
         });
     });
-    $jsq('#esns_box_close').click(function(){
+    jQuery('#esns_box_close').click(function(){
         EsNewsSubscribers.boxClose();
     });
 
