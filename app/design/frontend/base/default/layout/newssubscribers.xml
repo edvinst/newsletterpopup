@@ -6,7 +6,7 @@
         <action method="addJs"><script>newssubscribers/jquery_1_4_2_min.js</script></action>
         <action method="addJs"><script>newssubscribers/script.js</script></action>
 	</reference>
-    <reference name="footer">
+    <reference name="before_body_end">
         <block type="newssubscribers/newssubscribers" name="newssubscribers" template="newssubscribers/newssubscribers.phtml" />
     </reference>
   </default>
