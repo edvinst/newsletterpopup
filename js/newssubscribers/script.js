@@ -78,7 +78,7 @@ jQuery(function() {
                 jQuery('#esns_box_subscribe_response_error').html('');
                 jQuery('#esns_box_subscribe_response_success').html(resp.successMsg);
                 jQuery('#esns_box_subscribe_form').css('display','none');
-                jQuery('#esns_box_subscribe_response_success');
+                jQuery('#esns_box_subscribe_response_success').css('display','block');
                 setTimeout('EsNewsSubscribers.boxClose()', 5000)
             }
         });
