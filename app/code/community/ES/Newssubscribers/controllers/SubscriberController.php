@@ -5,31 +5,45 @@ include_once('Mage/Newsletter/controllers/SubscriberController.php');
 class ES_Newssubscribers_SubscriberController extends Mage_Newsletter_SubscriberController
 {
 
-    public function newAction()
+    public function newAjaxAction()
     {
-        parent::newAction();
-
-        if (!Mage::getStoreConfig('newsletter/common/isactive'))
-            return '';
-
         $session = Mage::getSingleton('core/session');
-        $errorMsg = '';
-        $errors = $session->getMessages(false)->getErrors();
-        $email = (string) $this->getRequest()->getPost('email');
-        if ($errors)
-            $errorMsg = $errors[0]->getText();
+        if ($this->getRequest()->isPost() && $this->getRequest()->getPost('email')) {
+            $customerSession    = Mage::getSingleton('customer/session');
+            $email              = (string) $this->getRequest()->getPost('email');
 
-        if (!$errorMsg) {
             try {
+                if (!Zend_Validate::is($email, 'EmailAddress')) {
+                    Mage::throwException($this->__('Please enter a valid email address.'));
+                }
 
-                /*$mailTemplate = Mage::getModel('core/email_template');
-                $mailTemplate->sendTransactional(1, array(
-                    'name' => Mage::getStoreConfig('trans_email/ident_general/name'),
-                    'email' => Mage::getStoreConfig('trans_email/ident_general/email')
-                ), $email, 'newsletter_subscr_coupon', array(
-                    'couponCode' => $couponData['code']
-                ));*/
+                if (Mage::getStoreConfig(Mage_Newsletter_Model_Subscriber::XML_PATH_ALLOW_GUEST_SUBSCRIBE_FLAG) != 1 &&
+                    !$customerSession->isLoggedIn()) {
+                    Mage::throwException($this->__('Sorry, but administrator denied subscription for guests. Please <a href="%s">register</a>.', Mage::helper('customer')->getRegisterUrl()));
+                }
 
+                $ownerId = Mage::getModel('customer/customer')
+                    ->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
+                    ->loadByEmail($email)
+                    ->getId();
+                if ($ownerId !== null && $ownerId != $customerSession->getId()) {
+                    Mage::throwException($this->__('This email address is already assigned to another user.'));
+                }
+
+                $subscriberId = Mage::getModel('newsletter/subscriber')
+                    ->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
+                    ->loadByEmail($email)
+                    ->getId();
+                if ($subscriberId !== null)
+                    Mage::throwException($this->__('This email address is already exist'));
+
+                $status = Mage::getModel('newsletter/subscriber')->subscribe($email);
+                if ($status == Mage_Newsletter_Model_Subscriber::STATUS_NOT_ACTIVE) {
+                    $session->addSuccess($this->__('Confirmation request has been sent.'));
+                }
+                else {
+                    $session->addSuccess($this->__('Thank you for your subscription.'));
+                }
             }
             catch (Mage_Core_Exception $e) {
                 $session->addException($e, $this->__('There was a problem with the subscription: %s', $e->getMessage()));
@@ -38,12 +52,7 @@ class ES_Newssubscribers_SubscriberController extends Mage_Newsletter_Subscriber
                 $session->addException($e, $this->__('There was a problem with the subscription.'));
             }
         }
-    }
 
-    public function newajaxAction()
-    {
-        $this->newAction();
-        $session = Mage::getSingleton('core/session');
         $messages = $session->getMessages(true);
         $errors = $messages->getErrors();
         $response = array(
@@ -58,7 +67,8 @@ class ES_Newssubscribers_SubscriberController extends Mage_Newsletter_Subscriber
             $response['successMsg'] = $success[0]->getText();
         }
 
-        echo Mage::helper('core')->jsonEncode($response);
-        exit;
+        $this->getResponse()->setHeader('Content-type', 'application/json');
+        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($response));
     }
+
 }

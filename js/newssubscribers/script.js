@@ -73,12 +73,11 @@ $jsq(function() {
     $jsq('#esns_submit').click(function(){
         var email = $jsq('#esns_email').val();
         $jsq.post(EsNewsSubscribers.getBaseUrl()+'newsletter/subscriber/newajax/', {'email':email}, function(resp) {
-            var response = $jsq.parseJSON(resp);
-            if (response['errorMsg']) {
-                $jsq('#esns_box_subscribe_response_error').html(response['errorMsg']);
+            if (resp.errorMsg) {
+                $jsq('#esns_box_subscribe_response_error').html(resp.errorMsg);
             } else {
                 $jsq('#esns_box_subscribe_response_error').html('');
-                $jsq('#esns_box_subscribe_response_success').html(response['successMsg']);
+                $jsq('#esns_box_subscribe_response_success').html(resp.successMsg);
                 $jsq('#esns_box_subscribe_form').css('display','none');
                 $jsq('#esns_box_subscribe_response_success').css('display','block');
                 setTimeout('EsNewsSubscribers.boxClose()', 5000)
