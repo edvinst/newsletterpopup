@@ -53,12 +53,12 @@ var EsNewsSubscribers = {
 
     boxClose: function()
     {
-        $jsq('#esns_background_layer').fadeOut();
+        jQuery('#esns_background_layer').fadeOut();
     },
 
     boxOpen: function()
     {
-        $jsq('#esns_background_layer').fadeIn();
+        jQuery('#esns_background_layer').fadeIn();
     }
 };
 
