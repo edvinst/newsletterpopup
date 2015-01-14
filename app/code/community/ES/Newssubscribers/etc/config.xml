@@ -2,7 +2,7 @@
 <config>
     <modules>
         <ES_Newssubscribers>
-            <version>1.2.0</version>
+            <version>1.2.1</version>
         </ES_Newssubscribers>
     </modules>
 
@@ -78,6 +78,7 @@
         <newsletter>
             <general>
                 <isactive>0</isactive>
+                <jquery>1</jquery>
                 <cookielifetime>999</cookielifetime>
                 <cookiename>es_newssubscribers</cookiename>
                 <theme>default</theme>

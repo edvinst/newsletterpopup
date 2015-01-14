@@ -3,7 +3,7 @@
     <default>
 	<reference name="head">		
 		<action method="addItem"><type>skin_css</type><name>css/style-newssubscribers.css</name><params/></action>
-        <action method="addJs"><script>newssubscribers/jquery_1_4_2_min.js</script></action>
+        <action method="addJs" ifconfig="newsletter/general/jquery"><script>newssubscribers/jquery-1.11.2.min.js</script></action>
         <action method="addJs"><script>newssubscribers/script.js</script></action>
 	</reference>
     <reference name="before_body_end">

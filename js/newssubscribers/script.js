@@ -86,5 +86,6 @@ jQuery(function() {
     jQuery('#esns_box_close').click(function(){
         EsNewsSubscribers.boxClose();
     });
-
 });
+
+jQuery.noConflict();
