@@ -75,7 +75,7 @@
     </global>
 
     <default>
-        <newsletter>
+        <newssubscribers>
             <general>
                 <isactive>0</isactive>
                 <jquery>1</jquery>
@@ -91,6 +91,6 @@
                 <format>alphanum</format>
                 <length>8</length>
             </coupon>
-        </newsletter>
+        </newssubscribers>
     </default>
 </config>

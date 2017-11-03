@@ -4,36 +4,36 @@ class ES_Newssubscribers_Block_Newssubscribers extends Mage_Core_Block_Template
 
     public function getCookieName()
     {
-        return Mage::getStoreConfig('newsletter/general/cookiename');
+        return Mage::getStoreConfig('newssubscribers/general/cookiename');
     }
 
     public function getCookieLifeTime()
     {
-        return Mage::getStoreConfig('newsletter/general/cookielifetime');
+        return Mage::getStoreConfig('newssubscribers/general/cookielifetime');
     }
 
     public function isActivePopUp()
     {
-        return Mage::getStoreConfig('newsletter/general/isactive');
+        return Mage::getStoreConfig('newssubscribers/general/isactive');
     }
 
     public function getTheme()
     {
-        return Mage::getStoreConfig('newsletter/general/theme');
+        return Mage::getStoreConfig('newssubscribers/general/theme');
     }
 
     public function getFirstTitle()
     {
-        return Mage::getStoreConfig('newsletter/general/firsttitle');
+        return Mage::getStoreConfig('newssubscribers/general/firsttitle');
     }
 
     public function getSecondTitle()
     {
-        return Mage::getStoreConfig('newsletter/general/secondtitle');
+        return Mage::getStoreConfig('newssubscribers/general/secondtitle');
     }
 
     public function getText()
     {
-        return Mage::getStoreConfig('newsletter/general/message');
+        return Mage::getStoreConfig('newssubscribers/general/message');
     }
 }

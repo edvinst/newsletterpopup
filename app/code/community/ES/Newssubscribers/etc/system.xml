@@ -1,10 +1,22 @@
 <?xml version="1.0"?>
 <config>
+    <tabs>
+        <magetrend translate="label" module="newssubscribers">
+            <label>MageTrend Extensions</label>
+            <sort_order>401</sort_order>
+        </magetrend>
+    </tabs>
     <sections>
-        <newsletter translate="label" module="newssubscribers">
+        <newssubscribers translate="label" module="newssubscribers">
+            <label>Newsletter Popup (FREE)</label>
+            <tab>magetrend</tab>
+            <sort_order>99999</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
             <groups>
                 <general translate="label">
-                    <label>"Newsletter subscription with gift" Popup settings</label>
+                    <label>Popup settings</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>10</sort_order>
                     <show_in_default>1</show_in_default>
@@ -23,7 +35,7 @@
                         <jquery translate="label">
                             <label>Include jQuery Library</label>
                             <frontend_type>select</frontend_type>
-                            <sort_order>1</sort_order>
+                            <sort_order>2</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -33,7 +45,7 @@
                         <theme translate="label">
                             <label>Theme</label>
                             <frontend_type>select</frontend_type>
-                            <sort_order>1</sort_order>
+                            <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -42,7 +54,7 @@
                         <firsttitle translate="label">
                             <label>Title row 1</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>2</sort_order>
+                            <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -50,7 +62,7 @@
                         <secondtitle translate="label">
                             <label>Title row 2</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>3</sort_order>
+                            <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -58,7 +70,7 @@
                         <message translate="label">
                             <label>Text</label>
                             <frontend_type>Textarea</frontend_type>
-                            <sort_order>4</sort_order>
+                            <sort_order>40</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -66,7 +78,7 @@
                         <cookiename translate="label">
                             <label>Cookie Name</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>5</sort_order>
+                            <sort_order>50</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -75,7 +87,7 @@
                         <cookielifetime translate="label">
                             <label>Cookie Life Time (days)</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>7</sort_order>
+                            <sort_order>70</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -85,7 +97,7 @@
                 </general>
 
                 <coupon translate="label">
-                    <label>"Newsletter subscription with gift" Coupon settings</label>
+                    <label>Coupon settings</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>20</sort_order>
                     <show_in_default>1</show_in_default>
@@ -157,7 +169,7 @@
                     </fields>
                 </coupon>
             </groups>
-        </newsletter>
+        </newssubscribers>
     </sections>
 
 

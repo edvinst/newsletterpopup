@@ -7,14 +7,14 @@ class ES_Newssubscribers_Model_Subscriber extends Mage_Newsletter_Model_Subscrib
 
     public function getCouponCode()
     {
-        if (!Mage::getStoreConfig('newsletter/coupon/isactive'))
+        if (!Mage::getStoreConfig('newssubscribers/coupon/isactive'))
             return '';
 
         $model = Mage::getModel('salesrule/rule');
-        $model->load(Mage::getStoreConfig('newsletter/coupon/roleid'));
+        $model->load(Mage::getStoreConfig('newssubscribers/coupon/roleid'));
         $massGenerator = $model->getCouponMassGenerator();
         $session = Mage::getSingleton('core/session');
-        $ruleId = Mage::getStoreConfig('newsletter/coupon/roleid');
+        $ruleId = Mage::getStoreConfig('newssubscribers/coupon/roleid');
         if (!is_numeric($ruleId)) {
             return self::ERROR_SHOPPING_CARD_RULE_IS_MISSING;
         }
@@ -27,11 +27,11 @@ class ES_Newssubscribers_Model_Subscriber extends Mage_Newsletter_Model_Subscrib
             $massGenerator->setData(array(
                 'rule_id' => $ruleId,
                 'qty' => 1,
-                'length' => Mage::getStoreConfig('newsletter/coupon/length'),
-                'format' => Mage::getStoreConfig('newsletter/coupon/format'),
-                'prefix' => Mage::getStoreConfig('newsletter/coupon/prefix'),
-                'suffix' => Mage::getStoreConfig('newsletter/coupon/suffix'),
-                'dash' => Mage::getStoreConfig('newsletter/coupon/dash'),
+                'length' => Mage::getStoreConfig('newssubscribers/coupon/length'),
+                'format' => Mage::getStoreConfig('newssubscribers/coupon/format'),
+                'prefix' => Mage::getStoreConfig('newssubscribers/coupon/prefix'),
+                'suffix' => Mage::getStoreConfig('newssubscribers/coupon/suffix'),
+                'dash' => Mage::getStoreConfig('newssubscribers/coupon/dash'),
                 'uses_per_coupon' => 1,
                 'uses_per_customer' => 1
             ));
@@ -39,13 +39,10 @@ class ES_Newssubscribers_Model_Subscriber extends Mage_Newsletter_Model_Subscrib
             $latestCuopon = max($model->getCoupons());
         } catch (Mage_Core_Exception $e) {
             $session->addException($e, $this->__('There was a problem with coupon: %s', $e->getMessage()));
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             $session->addException($e, $this->__('There was a problem with coupon.'));
         }
 
         return $latestCuopon->getCode();
     }
-
-
 }

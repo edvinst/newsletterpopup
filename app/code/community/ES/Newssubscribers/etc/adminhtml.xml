@@ -2,16 +2,19 @@
 <config>
     <acl>
         <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
             <admin>
                 <children>
                     <system>
                         <children>
                             <config>
                                 <children>
-                                    <newsletter translate="title" module="newssubscribers">
-                                        <title></title>
-                                        <sort_order>60</sort_order>
-                                    </newsletter>
+                                    <newssubscribers translate="title" module="newssubscribers">
+                                        <title>Newsletter Popup (FREE)</title>
+                                        <sort_order>99</sort_order>
+                                    </newssubscribers>
                                 </children>
                             </config>
                         </children>
@@ -20,4 +23,4 @@
             </admin>
         </resources>
     </acl>
- </config>
+</config>
