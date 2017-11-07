@@ -18,23 +18,26 @@ class ES_Newssubscribers_Model_Subscriber extends Mage_Newsletter_Model_Subscrib
         if (!is_numeric($ruleId)) {
             return self::ERROR_SHOPPING_CARD_RULE_IS_MISSING;
         }
+
         $rule = Mage::getModel('salesrule/rule')->load($ruleId);
         if (!$rule->getId()) {
             return self::ERROR_SHOPPING_CARD_RULE_IS_MISSING;
         }
 
         try {
-            $massGenerator->setData(array(
-                'rule_id' => $ruleId,
-                'qty' => 1,
-                'length' => Mage::getStoreConfig('newssubscribers/coupon/length'),
-                'format' => Mage::getStoreConfig('newssubscribers/coupon/format'),
-                'prefix' => Mage::getStoreConfig('newssubscribers/coupon/prefix'),
-                'suffix' => Mage::getStoreConfig('newssubscribers/coupon/suffix'),
-                'dash' => Mage::getStoreConfig('newssubscribers/coupon/dash'),
-                'uses_per_coupon' => 1,
-                'uses_per_customer' => 1
-            ));
+            $massGenerator->setData(
+                array(
+                    'rule_id' => $ruleId,
+                    'qty' => 1,
+                    'length' => Mage::getStoreConfig('newssubscribers/coupon/length'),
+                    'format' => Mage::getStoreConfig('newssubscribers/coupon/format'),
+                    'prefix' => Mage::getStoreConfig('newssubscribers/coupon/prefix'),
+                    'suffix' => Mage::getStoreConfig('newssubscribers/coupon/suffix'),
+                    'dash' => Mage::getStoreConfig('newssubscribers/coupon/dash'),
+                    'uses_per_coupon' => 1,
+                    'uses_per_customer' => 1
+                )
+            );
             $massGenerator->generatePool();
             $latestCuopon = max($model->getCoupons());
         } catch (Mage_Core_Exception $e) {

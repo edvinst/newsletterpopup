@@ -19,7 +19,9 @@ class ES_Newssubscribers_SubscriberController extends Mage_Newsletter_Subscriber
 
                 if (Mage::getStoreConfig(Mage_Newsletter_Model_Subscriber::XML_PATH_ALLOW_GUEST_SUBSCRIBE_FLAG) != 1 &&
                     !$customerSession->isLoggedIn()) {
-                    Mage::throwException($this->__('Sorry, but administrator denied subscription for guests. Please <a href="%s">register</a>.', Mage::helper('customer')->getRegisterUrl()));
+                    $message = 'Sorry, but administrator denied '
+                        .'subscription for guests. Please <a href="%s">register</a>.';
+                    Mage::throwException($this->__($message, Mage::helper('customer')->getRegisterUrl()));
                 }
 
                 $ownerId = Mage::getModel('customer/customer')
@@ -40,15 +42,15 @@ class ES_Newssubscribers_SubscriberController extends Mage_Newsletter_Subscriber
                 $status = Mage::getModel('newsletter/subscriber')->subscribe($email);
                 if ($status == Mage_Newsletter_Model_Subscriber::STATUS_NOT_ACTIVE) {
                     $session->addSuccess($this->__('Confirmation request has been sent.'));
-                }
-                else {
+                } else {
                     $session->addSuccess($this->__('Thank you for your subscription.'));
                 }
-            }
-            catch (Mage_Core_Exception $e) {
-                $session->addException($e, $this->__('There was a problem with the subscription: %s', $e->getMessage()));
-            }
-            catch (Exception $e) {
+            } catch (Mage_Core_Exception $e) {
+                $session->addException(
+                    $e,
+                    $this->__('There was a problem with the subscription: %s', $e->getMessage())
+                );
+            } catch (Exception $e) {
                 $session->addException($e, $this->__('There was a problem with the subscription.'));
             }
         }
